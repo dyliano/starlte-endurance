@@ -68,7 +68,7 @@ void __iomem *g3d1_outstanding_regs;
 #endif /* CONFIG_EXYNOS_BUSMONITOR */
 
 /*  clk,vol,abb,min,max,down stay, pm_qos mem, pm_qos int, pm_qos cpu_kfc_min, pm_qos cpu_egl_max */
-static gpu_dvfs_info gpu_dvfs_table_default[] = 
+static gpu_dvfs_info gpu_dvfs_table_default[] = {
 	{598, 800000, 0, 78, 100, 9, 0, 1794000, 400000, 1950000, CPU_MAX},
 	{572, 800000, 0, 78, 100, 9, 0, 1794000, 400000, 1950000, CPU_MAX},
 	{546, 800000, 0, 78,  99, 5, 0, 1794000, 400000, 1950000, CPU_MAX},
