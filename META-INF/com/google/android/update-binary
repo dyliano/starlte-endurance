@@ -5,12 +5,11 @@
 ZIPFILE=$3
 OUTFD=$2
 
-lversion=4.9.133
-kversion=1.0.4
-build=1
+lversion=4.9.140
+kversion=1.1.2
 kname=APGK
 tagline='Thanks @ianmacd for APGK'
-version_str="$kname $lversion-$kversion-$build"
+version_str="$kname $lversion-$kversion"
 scr_wdth=50
 
 # Detect real $OUTFD
@@ -148,7 +147,7 @@ if ! ( [ $model = G960 ] || [ $model = G965 ] &&
   exit 1
 fi
 
-ui_print " - Detected a $device device on $fw firmware."
+ui_print " - Detected a $device device with $fw bootloader."
 
 [ $suffix = N ] &&
   ui_print " - NOTE: '$suffix' device support is experimental."
@@ -203,12 +202,12 @@ fi
 
 # Now get to work.
 #
-for i in boot-$kname-$lversion-$kversion-$build-g965.img \
-	 boot-$kname-$lversion-$kversion-oc-$build-g965.img.bsdiff \
-	 boot-$kname-$lversion-$kversion-uc-$build-g965.img.bsdiff \
-	 boot-$kname-$lversion-$kversion-$build-g960.img.bsdiff \
-	 boot-$kname-$lversion-$kversion-oc-$build-g960.img.bsdiff \
-	 boot-$kname-$lversion-$kversion-uc-$build-g960.img.bsdiff \
+for i in boot-$kname-$lversion-$kversion-g965.img \
+	 boot-$kname-$lversion-$kversion-oc-g965.img.bsdiff \
+	 boot-$kname-$lversion-$kversion-uc-g965.img.bsdiff \
+	 boot-$kname-$lversion-$kversion-g960.img.bsdiff \
+	 boot-$kname-$lversion-$kversion-oc-g960.img.bsdiff \
+	 boot-$kname-$lversion-$kversion-uc-g960.img.bsdiff \
 	 bspatch; do
   unzip_file $i /tmp/$i
 done
@@ -218,8 +217,8 @@ chmod 755 $bspatch
 
 image=standard
 variant=""
-src_img=/tmp/boot-$kname-$lversion-$kversion-$build-g965.img
-g960_img=/tmp/boot-$kname-$lversion-$kversion-$build-g960.img
+src_img=/tmp/boot-$kname-$lversion-$kversion-g965.img
+g960_img=/tmp/boot-$kname-$lversion-$kversion-g960.img
 
 if [ "$OVERCLOCK" = true ]; then
   image=overclock
@@ -230,7 +229,7 @@ elif [ "$UNDERCLOCK" = true ]; then
 fi
 
 lmodel=$( echo $model | tr '[A-Z]' '[a-z]' )
-dst_img=/tmp/boot-$kname-$lversion-$kversion$variant-$build-$lmodel.img
+dst_img=/tmp/boot-$kname-$lversion-$kversion$variant-$lmodel.img
 
 if [ -f $dst_img.bsdiff ]; then
   ui_print " - Constructing $image kernel for $device..."
