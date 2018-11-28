@@ -658,6 +658,7 @@ get_wdt_drv_data(struct platform_device *pdev)
 	}
 }
 
+#ifdef CONFIG_EXYNOS_SNAPSHOT_WATCHDOG_RESET
 int s3c2410wdt_set_emergency_stop(int index)
 {
 	struct s3c2410_wdt *wdt = s3c_wdt[index];
@@ -688,6 +689,7 @@ int s3c2410wdt_keepalive_emergency(bool reset, int index)
 	writel(wdt->count, wdt->reg_base + S3C2410_WTCNT);
 	return 0;
 }
+#endif
 
 static int s3c2410wdt_get_multistage_index(void)
 {
@@ -1306,7 +1308,9 @@ static void s3c2410wdt_shutdown(struct platform_device *dev)
 {
 #ifdef CONFIG_S3C2410_SHUTDOWN_REBOOT
 	pr_emerg("%s: watchdog is still alive\n", __func__);
+#ifdef CONFIG_EXYNOS_SNAPSHOT_WATCHDOG_RESET
 	s3c2410wdt_keepalive_emergency(true, 0);
+#endif
 #else
 	struct s3c2410_wdt *wdt = platform_get_drvdata(dev);
 
