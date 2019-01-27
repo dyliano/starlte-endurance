@@ -2761,7 +2761,7 @@ static int selinux_sb_kern_mount(struct super_block *sb, int flags, void *data)
 
 	/* Allow all mounts performed by the kernel */
 	if (flags & (MS_KERNMOUNT | MS_SUBMOUNT))
-		goto out;
+		return 0;
 
 	ad.type = LSM_AUDIT_DATA_DENTRY;
 	ad.u.dentry = sb->s_root;
