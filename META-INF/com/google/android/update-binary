@@ -5,8 +5,8 @@
 ZIPFILE=$3
 OUTFD=$2
 
-lversion=4.9.165
-kversion=1.0.18
+lversion=4.9.167
+kversion=1.0.20
 build=1
 kname=APGK
 tagline='Thanks @ianmacd for APGK'
