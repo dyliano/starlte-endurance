@@ -426,6 +426,7 @@ void die(const char *str, struct pt_regs *regs, int err)
 
 	bust_spinlocks(0);
 	add_taint(TAINT_DIE, LOCKDEP_NOW_UNRELIABLE);
+
 	oops_exit();
 
 #ifdef CONFIG_SEC_DEBUG_EXTRA_INFO
