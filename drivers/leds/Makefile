@@ -81,3 +81,5 @@ obj-$(CONFIG_LEDS_DAC124S085)		+= leds-dac124s085.o
 
 # LED Triggers
 obj-$(CONFIG_LEDS_TRIGGERS)		+= trigger/
+
+subdir-ccflags-y += -Wno-stringop-overflow

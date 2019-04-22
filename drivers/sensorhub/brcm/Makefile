@@ -51,3 +51,4 @@ obj-$(CONFIG_SENSORS_SSP_BBD)           += bbdpl/
 obj-$(CONFIG_SSP_MOTOR_CALLBACK)        += ssp_motorcallback.o
 obj-$(CONFIG_SENSORS_SSP_THERMISTOR)        += factory/thermistor.o
 
+subdir-ccflags-y += -Wno-sizeof-pointer-memaccess
