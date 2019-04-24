@@ -1222,11 +1222,6 @@ static void sec_ts_read_event(struct sec_ts_data *ts)
 						input_report_key(ts->input_dev, BTN_TOUCH, 1);
 						input_report_key(ts->input_dev, BTN_TOOL_FINGER, 1);
 
-#ifdef CONFIG_WAKE_GESTURES
-						if (is_suspended)
-							ts->coord[t_id].x += 5000;
-#endif
-
 						input_report_abs(ts->input_dev, ABS_MT_POSITION_X, ts->coord[t_id].x);
 						input_report_abs(ts->input_dev, ABS_MT_POSITION_Y, ts->coord[t_id].y);
 						input_report_abs(ts->input_dev, ABS_MT_TOUCH_MAJOR, ts->coord[t_id].major);
@@ -1305,6 +1300,11 @@ static void sec_ts_read_event(struct sec_ts_data *ts)
 						input_mt_report_slot_state(ts->input_dev, MT_TOOL_FINGER, 1);
 						input_report_key(ts->input_dev, BTN_TOUCH, 1);
 						input_report_key(ts->input_dev, BTN_TOOL_FINGER, 1);
+
+#ifdef CONFIG_WAKE_GESTURES
+						if (is_suspended)
+							ts->coord[t_id].x += 5000;
+#endif
 
 						input_report_abs(ts->input_dev, ABS_MT_POSITION_X, ts->coord[t_id].x);
 						input_report_abs(ts->input_dev, ABS_MT_POSITION_Y, ts->coord[t_id].y);
@@ -2911,6 +2911,18 @@ static int sec_ts_input_open(struct input_dev *dev)
 	ts->print_info_cnt_open = 0;
 	ts->print_info_cnt_release = 0;
 	schedule_work(&ts->work_print_info.work);
+
+#ifdef CONFIG_WAKE_GESTURES
+	if (dt2w_switch_changed) {
+		dt2w_switch = dt2w_switch_temp;
+		dt2w_switch_changed = false;
+	}
+	if (s2w_switch_changed) {
+		s2w_switch = s2w_switch_temp;
+		s2w_switch_changed = false;
+	}
+#endif
+
 	return 0;
 }
 
@@ -3250,17 +3262,6 @@ out:
 #endif
 	if (ts->lowpower_mode)
 		reinit_completion(&ts->resume_done);
-
-#ifdef CONFIG_WAKE_GESTURES
-	if (dt2w_switch_changed) {
-		dt2w_switch = dt2w_switch_temp;
-		dt2w_switch_changed = false;
-	}
-	if (s2w_switch_changed) {
-		s2w_switch = s2w_switch_temp;
-		s2w_switch_changed = false;
-	}
-#endif
 
 	return 0;
 }
