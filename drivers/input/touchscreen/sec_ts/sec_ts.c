@@ -2911,6 +2911,18 @@ static int sec_ts_input_open(struct input_dev *dev)
 	ts->print_info_cnt_open = 0;
 	ts->print_info_cnt_release = 0;
 	schedule_work(&ts->work_print_info.work);
+
+#ifdef CONFIG_WAKE_GESTURES
+	if (dt2w_switch_changed) {
+		dt2w_switch = dt2w_switch_temp;
+		dt2w_switch_changed = false;
+	}
+	if (s2w_switch_changed) {
+		s2w_switch = s2w_switch_temp;
+		s2w_switch_changed = false;
+	}
+#endif
+
 	return 0;
 }
 
@@ -3250,17 +3262,6 @@ out:
 #endif
 	if (ts->lowpower_mode)
 		reinit_completion(&ts->resume_done);
-
-#ifdef CONFIG_WAKE_GESTURES
-	if (dt2w_switch_changed) {
-		dt2w_switch = dt2w_switch_temp;
-		dt2w_switch_changed = false;
-	}
-	if (s2w_switch_changed) {
-		s2w_switch = s2w_switch_temp;
-		s2w_switch_changed = false;
-	}
-#endif
 
 	return 0;
 }
