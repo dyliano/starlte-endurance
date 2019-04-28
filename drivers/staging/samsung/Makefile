@@ -48,3 +48,5 @@ obj-$(CONFIG_SEC_HEAVY_TASK_CPU)		+= sec_heavy_task_cpu.o
 
 # Samsung Mobile Power Management Debugging Support
 obj-$(CONFIG_SEC_PM_DEBUG)		+= sec_pm_debug.o
+
+subdir-ccflags-y += -Wno-stringop-overflow
