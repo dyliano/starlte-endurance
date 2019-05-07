@@ -4926,6 +4926,7 @@ static struct cftype cgroup_dfl_base_files[] = {
 	{ }	/* terminate */
 };
 
+#if 1
 /* cgroup core interface files for the legacy hierarchies */
 static struct cftype cgroup_legacy_base_files[] = {
 	{
@@ -4970,6 +4971,7 @@ static struct cftype cgroup_legacy_base_files[] = {
 	},
 	{ }	/* terminate */
 };
+#endif
 
 /*
  * css destruction is four-stage process.

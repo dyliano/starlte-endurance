@@ -3946,6 +3946,7 @@ out_kfree:
 	return ret;
 }
 
+#if 1
 static struct cftype mem_cgroup_legacy_files[] = {
 	{
 		.name = "usage_in_bytes",
@@ -4017,12 +4018,14 @@ static struct cftype mem_cgroup_legacy_files[] = {
 		.name = "vmpressure",
 		.read_u64 = mem_cgroup_vmpressure_read,
 	},
+#endif
 #ifdef CONFIG_NUMA
 	{
 		.name = "numa_stat",
 		.seq_show = memcg_numa_stat_show,
 	},
 #endif
+#if 1
 	{
 		.name = "kmem.limit_in_bytes",
 		.private = MEMFILE_PRIVATE(_KMEM, RES_LIMIT),
@@ -4054,7 +4057,7 @@ static struct cftype mem_cgroup_legacy_files[] = {
 		.seq_stop = slab_stop,
 		.seq_show = memcg_slab_show,
 	},
-#endif
+#endif /* CONFIG_SLABINFO */
 	{
 		.name = "kmem.tcp.limit_in_bytes",
 		.private = MEMFILE_PRIVATE(_TCP, RES_LIMIT),
@@ -4080,6 +4083,7 @@ static struct cftype mem_cgroup_legacy_files[] = {
 	},
 	{ },	/* terminate */
 };
+#endif
 
 /*
  * Private memory cgroup IDR
@@ -6121,6 +6125,7 @@ static struct cftype swap_files[] = {
 	{ }	/* terminate */
 };
 
+#if 1
 static struct cftype memsw_cgroup_files[] = {
 	{
 		.name = "memsw.usage_in_bytes",
@@ -6147,6 +6152,7 @@ static struct cftype memsw_cgroup_files[] = {
 	},
 	{ },	/* terminate */
 };
+#endif
 
 static int __init mem_cgroup_swap_init(void)
 {
