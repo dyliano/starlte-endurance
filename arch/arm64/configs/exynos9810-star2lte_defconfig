@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 4.9.170 Kernel Configuration
+# Linux/arm64 4.9.173 Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -1970,6 +1970,7 @@ CONFIG_WLAN_VENDOR_TI=y
 CONFIG_WLAN_VENDOR_ZYDAS=y
 # CONFIG_USB_ZD1201 is not set
 # CONFIG_USB_NET_RNDIS_WLAN is not set
+# CONFIG_VIRT_WIFI is not set
 
 #
 # Enable WiMAX (Networking options) to see the WiMAX drivers
