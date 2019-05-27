@@ -21,12 +21,12 @@
 # File paths *must* have an '/' at the end, or else the script will generate various errors
 
 # Versions
-OLD_UPSTREAM=4\.9\.168
-UPSTREAM=4\.9\.169
-PIE_OLD_VERSION=2\.0\.10
-PIE_VERSION=2\.0\.11
-OREO_OLD_VERSION=1\.2\.16
-OREO_VERSION=1\.2\.17
+OLD_UPSTREAM=4\.9\.178
+UPSTREAM=4\.9\.179
+PIE_OLD_VERSION=2\.0\.19
+PIE_VERSION=2\.0\.20
+OREO_OLD_VERSION=1\.2\.25
+OREO_VERSION=1\.2\.26
 
 # Default Device
 # Used as a backup when no valid device is defined
@@ -34,31 +34,34 @@ DEFAULT_DEVICE=starlte
 DEFAULT_DEVICE_DIRECTORY="$STAR_KERNEL_DIRECTORY"
 
 # Kernel Source Paths
-STAR_KERNEL_DIRECTORY=~/kernels/builds/starlte-endurance/
-CROWN_KERNEL_DIRECTORY=~/kernels/builds/crownlte-endurance/
-TOOLCHAINS_DIRECTORY=~/kernels/toolchains/
+STAR_KERNEL_DIRECTORY=${HOME}/kernels/builds/starlte-endurance/
+CROWN_KERNEL_DIRECTORY=${HOME}/kernels/builds/crownlte-endurance/
+TOOLCHAINS_DIRECTORY=${HOME}/kernels/toolchains/
 
 # Android Image Kitchen paths
-AIK_PIE_960=~/PIE-960/
-AIK_PIE_965=~/PIE-965/
-AIK_PIE_N960=~/PIE-N960/
-AIK_OREO_960=~/APGK-960/
-AIK_OREO_965=~/APGK-965/
-AIK_OREO_N960=~/TW-N960/
-AIK_PIE_AOSP=~/PIE-960-AOSP/
-AIK_OREO_AOSP_960=~/AOSP-960/
-AIK_OREO_AOSP_965=~/AOSP-965/
+AIK_PIE_960=${HOME}/PIE-960/
+AIK_PIE_965=${HOME}/PIE-965/
+AIK_PIE_N960=${HOME}/PIE-N960/
+AIK_OREO_960=${HOME}/APGK-960/
+AIK_OREO_965=${HOME}/APGK-965/
+AIK_OREO_N960=${HOME}/TW-N960/
+AIK_PIE_AOSP=${HOME}/PIE-960-AOSP/
+AIK_OREO_AOSP_960=${HOME}/AOSP-960/
+AIK_OREO_AOSP_965=${HOME}/AOSP-965/
 
 # Zip directories
-ZIP_PIE=~/kernels/zip-pie/
-ZIP_PIE_N960=~/kernels/zip-note-pie/
-ZIP_OREO=~/kernels/zip/
-ZIP_OREO_N960=~/kernels/zip-note/
-ZIP_PIE_AOSP_S9=~/kernels/zip-aosp-pie/
-ZIP_PIE_AOSP_N960=~/kernels/zip-note-pie-aosp/
-ZIP_GSI_S9=~/kernels/zip-gsi/
-ZIP_GSI_N960=~/kernels/zip-note-gsi/
-ZIP_OREO_AOSP_S9=~/kernels/zip-aosp/
+ZIP_PIE=${HOME}/kernels/zip-pie/
+ZIP_PIE_N960=${HOME}/kernels/zip-note-pie/
+ZIP_OREO=${HOME}/kernels/zip/
+ZIP_OREO_N960=${HOME}/kernels/zip-note/
+ZIP_PIE_AOSP_S9=${HOME}/kernels/zip-aosp-pie/
+ZIP_PIE_AOSP_N960=${HOME}/kernels/zip-note-pie-aosp/
+ZIP_GSI_S9=${HOME}/kernels/zip-gsi/
+ZIP_GSI_N960=${HOME}/kernels/zip-note-gsi/
+ZIP_OREO_AOSP_S9=${HOME}/kernels/zip-aosp/
+
+# Zip Output Directoryy
+ZIP_OUTPUT=${HOME}/output/zip/
 
 # Password for AIK sudo
 PASSWORD=
@@ -123,10 +126,10 @@ aosp_oc_star () {
 
 bsdiff_func () {
 	bsdiff boot-G965F.img boot-G960F.img boot-G960F.img.bsdiff
-	bsdiff boot-G960F-oc.img boot-G960F.img boot-G960F-oc.img.bsdiff
-	bsdiff boot-G960F-uc.img boot-G960F.img boot-G960F-uc.img.bsdiff
-	bsdiff boot-G965F-oc.img boot-G965F.img boot-G965F-oc.img.bsdiff
-	bsdiff boot-G965F-uc.img boot-G965F.img boot-G965F-uc.img.bsdiff
+	bsdiff boot-G960F.img boot-G960F-oc.img boot-G960F-oc.img.bsdiff
+	bsdiff boot-G960F.img boot-G960F-uc.img boot-G960F-uc.img.bsdiff
+	bsdiff boot-G965F.img boot-G965F-oc.img boot-G965F-oc.img.bsdiff
+	bsdiff boot-G965F.img boot-G965F-uc.img boot-G965F-uc.img.bsdiff
 }
 
 ## Help
@@ -708,8 +711,8 @@ if [ "$4" == "test" ] || [ "$5" == "test" ]; then
 					cd "$ZIP_PIE_N960" || exit
 					rm -f *.zip
 					if [ "$4" == "oc" ]; then
-						zip -r Endurance-Kernel-N9-OC"$PIE_VERSION".zip *
-						cp Endurance-Kernel-N9-OC"$PIE_VERSION".zip "$ZIP_OUTPUT"
+						zip -r Endurance-Kernel-N9-OC-"$PIE_VERSION".zip *
+						cp Endurance-Kernel-N9-OC-"$PIE_VERSION".zip "$ZIP_OUTPUT"
 					else
 						zip -r Endurance-Kernel-N9-"$PIE_VERSION".zip *
 						cp Endurance-Kernel-N9-"$PIE_VERSION".zip "$ZIP_OUTPUT"
@@ -718,7 +721,7 @@ if [ "$4" == "test" ] || [ "$5" == "test" ]; then
 					cd "$ZIP_OREO_N960" || exit
 					rm -f *.zip
 					if [ "$4" == "oc" ]; then
-						zip -r Endurance-Kernel-N9-OC"$OREO_VERSION".zip *
+						zip -r Endurance-Kernel-N9-OC-"$OREO_VERSION".zip *
 						cp Endurance-Kernel-N9-OC-"$OREO_VERSION".zip "$ZIP_OUTPUT"
 					else
 						zip -r Endurance-Kernel-N9-"$OREO_VERSION".zip *
@@ -794,8 +797,8 @@ if [ "$4" == "release" ] || [ "$5" == "release" ]; then
 					cd "$ZIP_PIE_N960" || exit
 					rm -f *.zip
 					if [ "$4" == "oc" ]; then
-						zip -r Endurance-Kernel-N9-OC"$PIE_VERSION".zip *
-						cp Endurance-Kernel-N9-OC"$PIE_VERSION".zip "$ZIP_OUTPUT"
+						zip -r Endurance-Kernel-N9-OC-"$PIE_VERSION".zip *
+						cp Endurance-Kernel-N9-OC-"$PIE_VERSION".zip "$ZIP_OUTPUT"
 					else
 						zip -r Endurance-Kernel-N9-"$PIE_VERSION".zip *
 						cp Endurance-Kernel-N9-"$PIE_VERSION".zip "$ZIP_OUTPUT"
@@ -804,7 +807,7 @@ if [ "$4" == "release" ] || [ "$5" == "release" ]; then
 					cd "$ZIP_OREO_N960" || exit
 					rm -f *.zip
 					if [ "$4" == "oc" ]; then
-						zip -r Endurance-Kernel-N9-OC"$OREO_VERSION".zip *
+						zip -r Endurance-Kernel-N9-OC-"$OREO_VERSION".zip *
 						cp Endurance-Kernel-N9-OC-"$OREO_VERSION".zip "$ZIP_OUTPUT"
 					else
 						zip -r Endurance-Kernel-N9-"$OREO_VERSION".zip *
@@ -819,7 +822,7 @@ if [ "$4" == "release" ] || [ "$5" == "release" ]; then
 					else
 						zip -r Endurance-Kernel-AOSP-N9-"$PIE_VERSION".zip *
 						cp Endurance-Kernel-AOSP-N9-"$PIE_VERSION".zip "$ZIP_OUTPUT"
-					fi
+					fi ;;
 				gsi)
 					cd "$ZIP_GSI_N960" || exit
 					rm -f *.zip
@@ -830,6 +833,6 @@ if [ "$4" == "release" ] || [ "$5" == "release" ]; then
 						zip -r Endurance-Kernel-GSI-N9-"$OREO_VERSION".zip *
 						cp Endurance-Kernel-GSI-N9-"$OREO_VERSION".zip "$ZIP_OUTPUT"
 					fi
-		esac
+			esac
 	esac
 fi
