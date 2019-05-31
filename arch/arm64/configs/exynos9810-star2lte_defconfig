@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 4.9.175 Kernel Configuration
+# Linux/arm64 4.9.177 Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -167,6 +167,11 @@ CONFIG_SCHED_USE_FLUID_RT=y
 CONFIG_BLK_DEV_INITRD=y
 CONFIG_INITRAMFS_SOURCE=""
 CONFIG_RD_GZIP=y
+# CONFIG_RD_BZIP2 is not set
+# CONFIG_RD_LZMA is not set
+# CONFIG_RD_XZ is not set
+# CONFIG_RD_LZO is not set
+# CONFIG_RD_LZ4 is not set
 CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE=y
 # CONFIG_CC_OPTIMIZE_FOR_SIZE is not set
 CONFIG_SYSCTL=y
@@ -5550,7 +5555,7 @@ CONFIG_INTEGRITY_ASYMMETRIC_KEYS=y
 # CONFIG_EVM is not set
 CONFIG_FIVE=y
 # CONFIG_FIVE_DEBUG is not set
-CONFIG_FIVE_CERT_USER="x509_five_user.der"
+CONFIG_FIVE_CERT_USER="./security/integrity/five/x509_five_user.der"
 CONFIG_FIVE_DEFAULT_HASH_SHA1=y
 # CONFIG_FIVE_DEFAULT_HASH_SHA256 is not set
 # CONFIG_FIVE_DEFAULT_HASH_SHA512 is not set
